@@ -14,9 +14,8 @@ public class Main {
     public final static int PORT_NUMBER = 8989;
 
     public static void main(String[] args) {
-        final String ROOT = "C:/Users/Konstantin/IdeaProjects/pcs-final-diplom/";
-        final String PDF_FOLDER = ROOT + "pdfs";
-        final String STOP_WORD_TXT = ROOT + "stop-ru.txt";
+        final String PDF_FOLDER = "./pdfs";
+        final String STOP_WORD_TXT = "./stop-ru.txt";
 
         BooleanSearchEngine engine = null;
         try (ServerSocket serverSocket = new ServerSocket(PORT_NUMBER)) {

@@ -27,10 +27,8 @@ public class BooleanSearchEngine implements SearchEngine {
                     for (var word : wordArray) {
 
                         String currentWord = word;
-                        String result = stopWordsList.stream()
-                                .filter(searchVal -> searchVal.equals(currentWord))
-                                .findAny()
-                                .orElse(null);
+                        String result = stopWordsList.stream().filter(searchVal -> searchVal
+                                .equals(currentWord)).findAny().orElse(null);
 
                         if (word.isEmpty() || !Objects.equals(result, null)) {
                             continue;
@@ -53,25 +51,27 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String[] words) {
-        List<SearchEngineEntry> list;
+        List<SearchEngineEntry> engineEntryListlist;
         List<PageEntry> pageEntryList = new ArrayList<>();
-        for (String value : words) {
-            list = searchEngineMap.getSearchEngineMap().get(value);
-            if (list != null) {
-                for (SearchEngineEntry val : list) {
+        for (String wordValue : words) {
+            engineEntryListlist = searchEngineMap.getSearchEngineMap().get(wordValue);
+            if (engineEntryListlist != null) {
+                for (SearchEngineEntry searchEngineValue : engineEntryListlist) {
                     boolean flagUpdate = false;
                     for (int i = 0; i < pageEntryList.size(); i++) {
-                        if (pageEntryList.get(i).getPdfName().equals(val.getFileName())
-                                && pageEntryList.get(i).getPage() == (val.getPageNumber())) {
+                        if (pageEntryList.get(i).getPdfName()
+                                .equals(searchEngineValue.getFileName())
+                                && pageEntryList.get(i).getPage() == (searchEngineValue.getPageNumber())) {
                             int freq = pageEntryList.get(i).getCount();
-                            pageEntryList.set(i, new PageEntry(val.getFileName(),
-                                    val.getPageNumber(), val.getFreq() + freq));
+                            pageEntryList.set(i, new PageEntry(searchEngineValue.getFileName(),
+                                    searchEngineValue.getPageNumber(), searchEngineValue.getFreq() + freq));
                             flagUpdate = true;
                             break;
                         }
                     }
                     if (!flagUpdate) {
-                        pageEntryList.add(new PageEntry(val.getFileName(), val.getPageNumber(), val.getFreq()));
+                        pageEntryList.add(new PageEntry(searchEngineValue.getFileName(),
+                                searchEngineValue.getPageNumber(), searchEngineValue.getFreq()));
                     }
                 }
             }

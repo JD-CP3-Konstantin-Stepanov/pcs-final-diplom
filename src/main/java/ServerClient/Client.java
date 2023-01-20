@@ -17,7 +17,7 @@ public class Client {
             System.out.println(in.readLine());
 
             System.out.println("Введите слова для поиска через пробел:");
-            out.println(scanner.nextLine());
+            out.println(scanner.nextLine().toLowerCase());
 
             int character;
             StringBuilder jsonAnswer = new StringBuilder();

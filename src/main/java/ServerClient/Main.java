@@ -35,7 +35,7 @@ public class Main {
                     out.println("Произведено подключение!");
                     out.flush();
 
-                    String request = in.readLine();
+                    String request = in.readLine().toLowerCase();
                     if (request.isEmpty()) {
                         continue;
                     }
